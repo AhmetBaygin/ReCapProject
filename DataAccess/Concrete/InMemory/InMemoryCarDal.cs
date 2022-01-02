@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -14,11 +15,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car{Id=1,BrandId=1,ColorId=1,dailyPrice=1000,modelYear=2000,description="bmw"},
-                new Car{Id=2,BrandId=1,ColorId=2,dailyPrice=2000,modelYear=2010,description="merso"},
-                new Car{Id=3,BrandId=1,ColorId=3,dailyPrice=4000,modelYear=2020,description="ford"},
-                new Car{Id=4,BrandId=2,ColorId=4,dailyPrice=7000,modelYear=2004,description="hyundai"},
-                new Car{Id=5,BrandId=2,ColorId=5,dailyPrice=3000,modelYear=1998,description="tofas"}
+                new Car{CarId=1,BrandId=1,ColorId=1,DailyPrice=1000,ModelYear=2000,Description="bmw"},
+                new Car{CarId=2,BrandId=1,ColorId=2,DailyPrice=2000,ModelYear=2010,Description="merso"},
+                new Car{CarId=3,BrandId=1,ColorId=3,DailyPrice=4000,ModelYear=2020,Description="ford"},
+                new Car{CarId=4,BrandId=2,ColorId=4,DailyPrice=7000,ModelYear=2004,Description="hyundai"},
+                new Car{CarId=5,BrandId=2,ColorId=5,DailyPrice=3000,ModelYear=1998,Description="tofas"}
             };
         }
         public void Add(Car car)
@@ -38,18 +39,18 @@ namespace DataAccess.Concrete.InMemory
             //}
             //_cars.Remove(carToDelete);
             //******alttaki linq ile üstteki normal
-            var cartooDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+            var cartooDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             _cars.Remove(cartooDelete);
 
         }
         public void Update(Car car)
         {
-            var carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
-            carToUpdate.modelYear = car.modelYear;
+            var carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
+            carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ColorId = car.ColorId;
-            carToUpdate.dailyPrice = car.dailyPrice;
-            carToUpdate.description = car.description;
+            carToUpdate.DailyPrice = car.DailyPrice;
+            carToUpdate.Description = car.Description;
 
         }
 
@@ -70,6 +71,14 @@ namespace DataAccess.Concrete.InMemory
             return resultt.ToList();
         }
 
-        
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
