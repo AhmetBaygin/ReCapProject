@@ -12,8 +12,14 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //CarTest();
-            CarTest2();
+            //CarTest2();
             //BrandTest();
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { Email="b@b.com",FirstName="aa",LastName="bb",Password="os1"});
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName);
+            }
 
         }
 
